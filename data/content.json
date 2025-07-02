@@ -1,8 +1,510 @@
 {
-    "Math": "Mathematics is the study of numbers, shapes, and patterns.",
-    "Science": "Science explores the natural world using observation and experimentation.",
-    "History": "History is the study of past events, particularly in human affairs.",
-    "Geography": "Geography is the study of places and the relationships between people and their environments.",
-    "Physics": "Physics is the branch of science that deals with the nature and properties of matter and energy."
+  "subjects": {
+    "mathematics": {
+      "description": "Mathematics is the abstract science of number, quantity, and space, either as abstract concepts or as applied to other disciplines such as physics and engineering.",
+      "topics": {
+        "algebra": "Algebra is a branch of mathematics dealing with symbols and the rules for manipulating those symbols. It includes solving equations, working with variables, and understanding functions.",
+        "geometry": "Geometry is concerned with properties of space relating to distance, shape, size, and relative position of figures. It includes concepts like points, lines, planes, angles, and solids.",
+        "calculus": "Calculus is the mathematical study of continuous change. It has two major branches: differential calculus (concerning rates of change) and integral calculus (concerning accumulation of quantities).",
+        "statistics": "Statistics is the discipline that concerns the collection, organization, analysis, interpretation, and presentation of data.",
+        "trigonometry": "Trigonometry is a branch of mathematics that studies relationships between side lengths and angles of triangles.",
+        "number_theory": "Number theory is a branch of pure mathematics devoted primarily to the study of integers and integer-valued functions."
+      },
+      "key_concepts": [
+        "Variables and constants",
+        "Equations and inequalities",
+        "Functions and graphs",
+        "Derivatives and integrals",
+        "Probability and statistics",
+        "Geometric shapes and proofs"
+      ]
+    },
+    "physics": {
+      "description": "Physics is the natural science that studies matter, its motion and behavior through space and time, and the related entities of energy and force.",
+      "topics": {
+        "mechanics": "Classical mechanics describes the motion of macroscopic objects from projectiles to parts of machinery and astronomical objects.",
+        "thermodynamics": "Thermodynamics is the branch of physics that deals with heat, work, temperature, energy, and entropy.",
+        "electromagnetism": "Electromagnetism is a branch of physics involving the study of electromagnetic force between electrically charged particles.",
+        "quantum_physics": "Quantum physics is the branch of physics that studies matter and energy at the atomic and subatomic level.",
+        "relativity": "Einstein's theory of relativity describes the physics of moving bodies and their effects on space and time.",
+        "optics": "Optics is the branch of physics that studies the behavior and properties of light and its interaction with matter."
+      },
+      "key_concepts": [
+        "Newton's laws of motion",
+        "Conservation of energy",
+        "Wave-particle duality",
+        "Electric and magnetic fields",
+        "Speed of light constant",
+        "Uncertainty principle"
+      ]
+    },
+    "chemistry": {
+      "description": "Chemistry is the scientific discipline involved with elements and compounds composed of atoms, molecules and ions: their composition, structure, properties, behavior and the changes they undergo.",
+      "topics": {
+        "organic_chemistry": "Organic chemistry is the study of the structure, properties, composition, reactions, and preparation of carbon-containing compounds.",
+        "inorganic_chemistry": "Inorganic chemistry deals with the properties and reactions of inorganic compounds—those that do not contain carbon-hydrogen bonds.",
+        "physical_chemistry": "Physical chemistry is the study of macroscopic, atomic, subatomic, and particulate phenomena in chemical systems.",
+        "biochemistry": "Biochemistry is the study of chemical processes within and relating to living organisms.",
+        "analytical_chemistry": "Analytical chemistry studies and uses instruments and methods used to separate, identify, and quantify matter.",
+        "nuclear_chemistry": "Nuclear chemistry is the study of chemical and physical properties of elements as influenced by changes in the structure of the atomic nucleus."
+      },
+      "key_concepts": [
+        "Periodic table",
+        "Chemical bonds",
+        "Chemical reactions",
+        "pH and acids/bases",
+        "Molecular structure",
+        "Stoichiometry"
+      ]
+    },
+    "biology": {
+      "description": "Biology is the natural science that studies life and living organisms, including their physical structure, chemical processes, molecular interactions, physiological mechanisms, development and evolution.",
+      "topics": {
+        "cell_biology": "Cell biology is the study of cell structure and function, and it revolves around the concept that the cell is the fundamental unit of life.",
+        "genetics": "Genetics is the study of genes, genetic variation, and heredity in organisms.",
+        "ecology": "Ecology is the study of the relationships between living organisms and their environment.",
+        "evolution": "Evolution is the change in the heritable traits of biological populations over successive generations.",
+        "anatomy": "Anatomy is the branch of biology concerned with the study of the structure of organisms and their parts.",
+        "microbiology": "Microbiology is the study of microscopic organisms, including bacteria, viruses, fungi, and protozoa."
+      },
+      "key_concepts": [
+        "DNA and RNA",
+        "Natural selection",
+        "Cellular respiration",
+        "Photosynthesis",
+        "Ecosystem dynamics",
+        "Genetic inheritance"
+      ]
+    },
+    "computer_science": {
+      "description": "Computer science is the study of computational systems, algorithms, and the design of computer systems and their applications.",
+      "topics": {
+        "programming": "Programming is the process of creating a set of instructions that tell a computer how to perform a task using programming languages.",
+        "algorithms": "An algorithm is a finite sequence of well-defined instructions for solving a computational problem or performing a computation.",
+        "data_structures": "Data structures are ways of organizing and storing data so that it can be accessed and modified efficiently.",
+        "artificial_intelligence": "AI is the simulation of human intelligence in machines that are programmed to think and learn like humans.",
+        "machine_learning": "Machine learning is a method of data analysis that automates analytical model building using algorithms that iteratively learn from data.",
+        "cybersecurity": "Cybersecurity is the practice of protecting systems, networks, and programs from digital attacks."
+      },
+      "key_concepts": [
+        "Object-oriented programming",
+        "Big O notation",
+        "Database management",
+        "Network protocols",
+        "Software engineering",
+        "Data mining"
+      ]
+    },
+    "history": {
+      "description": "History is the study of past events, particularly in human affairs, analyzing causes and effects of historical developments.",
+      "topics": {
+        "ancient_history": "Ancient history covers the time period from the beginning of writing and recorded human history to late antiquity.",
+        "medieval_history": "Medieval history spans from the fall of the Western Roman Empire in 476 AD to the Renaissance period.",
+        "modern_history": "Modern history covers the period from the Renaissance to the present day, including industrialization and globalization.",
+        "world_wars": "The World Wars were global conflicts that fundamentally changed the political, social, and economic landscape of the 20th century.",
+        "renaissance": "The Renaissance was a period of cultural, artistic, political and economic rebirth following the Middle Ages.",
+        "industrial_revolution": "The Industrial Revolution was the transition to new manufacturing processes in the period from about 1760 to 1840."
+      },
+      "key_concepts": [
+        "Cause and effect",
+        "Historical methodology",
+        "Primary and secondary sources",
+        "Chronological thinking",
+        "Historical context",
+        "Change and continuity"
+      ]
+    },
+    "literature": {
+      "description": "Literature encompasses written works, especially those considered of superior or lasting artistic merit, including novels, poetry, drama, and essays.",
+      "topics": {
+        "poetry": "Poetry is a form of literature that uses aesthetic and rhythmic qualities of language to evoke meanings and emotions.",
+        "drama": "Drama is a mode of fictional representation through dialogue and performance, intended for theatrical presentation.",
+        "fiction": "Fiction is literature created from the imagination, not presented as fact, including novels and short stories.",
+        "non_fiction": "Non-fiction is writing that is based on facts, real events, and real people, such as biography or history.",
+        "literary_analysis": "Literary analysis involves examining the components of a literary text to understand its meaning and significance.",
+        "world_literature": "World literature encompasses literary works from around the globe, representing diverse cultures and traditions."
+      },
+      "key_concepts": [
+        "Theme and symbolism",
+        "Character development",
+        "Plot structure",
+        "Literary devices",
+        "Genre conventions",
+        "Cultural context"
+      ]
+    },
+    "geography": {
+      "description": "Geography is the study of places and the relationships between people and their environments, examining both physical and human aspects of the world.",
+      "topics": {
+        "physical_geography": "Physical geography examines the natural environment and how the climate, vegetation, soil, rocks, and landforms are produced and interact.",
+        "human_geography": "Human geography is concerned with the study of people and their communities, cultures, economies, and interactions with the environment.",
+        "cartography": "Cartography is the study and practice of making maps, combining science, aesthetics, and technique.",
+        "climatology": "Climatology is the study of climate and long-term weather patterns over time and space.",
+        "urban_geography": "Urban geography is the study of urban areas, their internal structure, and their interaction with surrounding areas.",
+        "economic_geography": "Economic geography examines the location, distribution and spatial organization of economic activities."
+      },
+      "key_concepts": [
+        "Spatial relationships",
+        "Geographic information systems",
+        "Climate patterns",
+        "Population distribution",
+        "Natural resources",
+        "Globalization effects"
+      ]
+    }
+  },
+  "quiz_database": {
+    "mathematics": [
+      {
+        "question": "What is the derivative of x²?",
+        "answer": "2x",
+        "type": "calculus",
+        "difficulty": "easy",
+        "explanation": "Using the power rule: d/dx(x^n) = nx^(n-1), so d/dx(x²) = 2x^(2-1) = 2x"
+      },
+      {
+        "question": "What is the quadratic formula?",
+        "answer": "x = (-b ± √(b²-4ac)) / 2a",
+        "type": "algebra",
+        "difficulty": "medium",
+        "explanation": "The quadratic formula solves equations of the form ax² + bx + c = 0"
+      },
+      {
+        "question": "What is the sum of angles in a triangle?",
+        "answer": "180 degrees",
+        "type": "geometry",
+        "difficulty": "easy",
+        "explanation": "This is a fundamental theorem in Euclidean geometry"
+      },
+      {
+        "question": "What is the integral of 1/x?",
+        "answer": "ln|x| + C",
+        "type": "calculus",
+        "difficulty": "medium",
+        "explanation": "The natural logarithm is the antiderivative of 1/x"
+      },
+      {
+        "question": "What is the Pythagorean theorem?",
+        "answer": "a² + b² = c²",
+        "type": "geometry",
+        "difficulty": "easy",
+        "explanation": "In a right triangle, the square of the hypotenuse equals the sum of squares of the other two sides"
+      }
+    ],
+    "physics": [
+      {
+        "question": "What is Newton's second law?",
+        "answer": "F = ma",
+        "type": "mechanics",
+        "difficulty": "easy",
+        "explanation": "Force equals mass times acceleration"
+      },
+      {
+        "question": "What is the speed of light in vacuum?",
+        "answer": "299,792,458 m/s",
+        "type": "relativity",
+        "difficulty": "medium",
+        "explanation": "This is a fundamental constant in physics, approximately 3×10⁸ m/s"
+      },
+      {
+        "question": "What is the unit of electric current?",
+        "answer": "Ampere",
+        "type": "electromagnetism",
+        "difficulty": "easy",
+        "explanation": "The ampere (A) is the base unit of electric current in the International System of Units"
+      },
+      {
+        "question": "What is Planck's constant approximately?",
+        "answer": "6.626 × 10⁻³⁴ J·s",
+        "type": "quantum_physics",
+        "difficulty": "hard",
+        "explanation": "Planck's constant is fundamental to quantum mechanics"
+      },
+      {
+        "question": "What is the first law of thermodynamics?",
+        "answer": "Energy cannot be created or destroyed",
+        "type": "thermodynamics",
+        "difficulty": "medium",
+        "explanation": "Also known as the law of conservation of energy"
+      }
+    ],
+    "chemistry": [
+      {
+        "question": "What is the atomic number of carbon?",
+        "answer": "6",
+        "type": "general",
+        "difficulty": "easy",
+        "explanation": "Carbon has 6 protons in its nucleus"
+      },
+      {
+        "question": "What is Avogadro's number?",
+        "answer": "6.022 × 10²³",
+        "type": "physical_chemistry",
+        "difficulty": "medium",
+        "explanation": "This is the number of particles in one mole of substance"
+      },
+      {
+        "question": "What is the pH of pure water?",
+        "answer": "7",
+        "type": "general",
+        "difficulty": "easy",
+        "explanation": "Pure water is neutral with equal concentrations of H⁺ and OH⁻ ions"
+      },
+      {
+        "question": "What is the molecular formula for methane?",
+        "answer": "CH₄",
+        "type": "organic_chemistry",
+        "difficulty": "easy",
+        "explanation": "Methane is the simplest hydrocarbon with one carbon and four hydrogen atoms"
+      },
+      {
+        "question": "What type of bond holds water molecules together?",
+        "answer": "Hydrogen bonds",
+        "type": "general",
+        "difficulty": "medium",
+        "explanation": "Hydrogen bonds form between the partially positive hydrogen and partially negative oxygen"
+      }
+    ],
+    "biology": [
+      {
+        "question": "What is the powerhouse of the cell?",
+        "answer": "Mitochondria",
+        "type": "cell_biology",
+        "difficulty": "easy",
+        "explanation": "Mitochondria produce ATP, the energy currency of cells"
+      },
+      {
+        "question": "What does DNA stand for?",
+        "answer": "Deoxyribonucleic acid",
+        "type": "genetics",
+        "difficulty": "easy",
+        "explanation": "DNA carries genetic information in most living organisms"
+      },
+      {
+        "question": "Who proposed the theory of evolution by natural selection?",
+        "answer": "Charles Darwin",
+        "type": "evolution",
+        "difficulty": "easy",
+        "explanation": "Darwin's 'On the Origin of Species' introduced this groundbreaking theory"
+      },
+      {
+        "question": "What is the process by which plants make food?",
+        "answer": "Photosynthesis",
+        "type": "plant_biology",
+        "difficulty": "easy",
+        "explanation": "Plants convert sunlight, carbon dioxide, and water into glucose and oxygen"
+      },
+      {
+        "question": "How many chromosomes do humans have?",
+        "answer": "46",
+        "type": "genetics",
+        "difficulty": "medium",
+        "explanation": "Humans have 23 pairs of chromosomes, totaling 46"
+      }
+    ],
+    "computer_science": [
+      {
+        "question": "What does CPU stand for?",
+        "answer": "Central Processing Unit",
+        "type": "hardware",
+        "difficulty": "easy",
+        "explanation": "The CPU is the primary component that executes instructions in a computer"
+      },
+      {
+        "question": "What is the time complexity of binary search?",
+        "answer": "O(log n)",
+        "type": "algorithms",
+        "difficulty": "medium",
+        "explanation": "Binary search halves the search space with each comparison"
+      },
+      {
+        "question": "What does HTML stand for?",
+        "answer": "HyperText Markup Language",
+        "type": "web_development",
+        "difficulty": "easy",
+        "explanation": "HTML is the standard markup language for creating web pages"
+      },
+      {
+        "question": "What is a data structure that follows LIFO principle?",
+        "answer": "Stack",
+        "type": "data_structures",
+        "difficulty": "easy",
+        "explanation": "Stack follows Last In, First Out - like a stack of plates"
+      },
+      {
+        "question": "What does SQL stand for?",
+        "answer": "Structured Query Language",
+        "type": "databases",
+        "difficulty": "easy",
+        "explanation": "SQL is used for managing and querying relational databases"
+      }
+    ],
+    "history": [
+      {
+        "question": "In which year did World War II end?",
+        "answer": "1945",
+        "type": "world_wars",
+        "difficulty": "easy",
+        "explanation": "World War II ended in 1945 with the surrender of Japan in September"
+      },
+      {
+        "question": "Who was the first President of the United States?",
+        "answer": "George Washington",
+        "type": "american_history",
+        "difficulty": "easy",
+        "explanation": "Washington served as the first President from 1789 to 1797"
+      },
+      {
+        "question": "What year did the Berlin Wall fall?",
+        "answer": "1989",
+        "type": "modern_history",
+        "difficulty": "medium",
+        "explanation": "The fall of the Berlin Wall marked the beginning of German reunification"
+      },
+      {
+        "question": "Which empire was ruled by Julius Caesar?",
+        "answer": "Roman Empire",
+        "type": "ancient_history",
+        "difficulty": "easy",
+        "explanation": "Caesar was a key figure in the transformation of the Roman Republic into the Roman Empire"
+      },
+      {
+        "question": "What was the period of cultural rebirth in Europe called?",
+        "answer": "Renaissance",
+        "type": "cultural_history",
+        "difficulty": "easy",
+        "explanation": "The Renaissance was a period of renewed interest in art, science, and learning"
+      }
+    ]
+  },
+  "thinking_patterns": {
+    "analysis_steps": [
+      "Understanding the context and identifying key concepts",
+      "Breaking down complex problems into manageable parts",
+      "Connecting new information to existing knowledge",
+      "Evaluating different approaches and perspectives",
+      "Synthesizing information to form comprehensive understanding"
+    ],
+    "learning_strategies": [
+      "Active recall and spaced repetition",
+      "Connecting concepts across different subjects",
+      "Using analogies and real-world examples",
+      "Practice through problem-solving",
+      "Teaching concepts to reinforce understanding"
+    ],
+    "critical_thinking": [
+      "Questioning assumptions and evaluating evidence",
+      "Considering multiple viewpoints and perspectives",
+      "Identifying logical fallacies and biases",
+      "Drawing conclusions based on analysis",
+      "Applying knowledge to new situations"
+    ],
+    "problem_solving": [
+      "Define the problem clearly",
+      "Gather relevant information",
+      "Generate multiple solution approaches",
+      "Evaluate pros and cons of each approach",
+      "Implement the best solution and monitor results"
+    ]
+  },
+  "metacognitive_knowledge": {
+    "learning_awareness": "Understanding how you learn best and adapting strategies accordingly",
+    "self_regulation": "Monitoring your own thinking processes and adjusting when needed",
+    "knowledge_transfer": "Applying concepts learned in one context to new situations",
+    "reflection": "Thinking about your thinking to improve future learning",
+    "growth_mindset": "Believing that abilities can be developed through dedication and hard work"
+  },
+  "common_sense_knowledge": {
+    "basic_facts": {
+      "time": "There are 24 hours in a day, 7 days in a week, 12 months in a year.",
+      "weather": "Rain makes things wet, snow is cold and white, sun provides warmth and light.",
+      "food": "Fruits and vegetables are healthy, water is essential for life, cooking makes food safe to eat.",
+      "animals": "Dogs bark, cats meow, birds fly, fish swim in water.",
+      "human_body": "Humans have 5 senses: sight, hearing, smell, taste, and touch.",
+      "physics_basics": "Things fall down due to gravity, fire is hot, ice is cold.",
+      "social": "People need sleep, friendship is important, helping others is good."
+    },
+    "reasoning_patterns": {
+      "cause_effect": "If you don't water plants, they will die. If you study hard, you'll likely do well on tests.",
+      "comparisons": "Elephants are larger than mice, summer is warmer than winter.",
+      "sequences": "First you wake up, then you get dressed, then you eat breakfast.",
+      "categories": "Apples and oranges are fruits, cars and buses are vehicles."
+    }
+  },
+  "math_operations": {
+    "basic_arithmetic": {
+      "addition": "Adding numbers together to get a sum",
+      "subtraction": "Taking one number away from another",
+      "multiplication": "Repeated addition of the same number",
+      "division": "Splitting a number into equal parts"
+    },
+    "word_problems": {
+      "shopping": "If apples cost $2 per pound and you buy 3 pounds, you spend $6",
+      "time": "If a movie starts at 7:30 PM and lasts 2 hours, it ends at 9:30 PM",
+      "distance": "If you walk 2 miles per hour for 3 hours, you walk 6 miles total"
+    }
+  },
+  "casual_conversation": {
+    "greetings": [
+      "Hello! How are you doing today?",
+      "Hi there! What's on your mind?",
+      "Hey! How can I help you today?",
+      "Good to see you! What would you like to chat about?"
+    ],
+    "small_talk": {
+      "weather": "Weather can really affect our mood! Sunny days often make people feel more energetic.",
+      "food": "Food is not just fuel for our bodies, it's also a way to bring people together and explore cultures.",
+      "hobbies": "Hobbies are great for relaxation and personal growth. What do you like to do in your free time?",
+      "daily_life": "Life is full of small moments that can bring joy if we pay attention to them."
+    },
+    "encouragement": [
+      "That's a great question! Keep being curious.",
+      "You're thinking about this in a really interesting way.",
+      "I love how you're approaching this problem!",
+      "Don't worry, everyone learns at their own pace."
+    ],
+    "common_responses": {
+      "agreement": "I understand what you mean.",
+      "clarification": "Could you tell me more about that?",
+      "support": "That sounds challenging, but I believe you can work through it.",
+      "interest": "That's fascinating! I'd love to hear more about your thoughts on this."
+    }
+  },
+  "conversation_patterns": {
+    "greetings": [
+      "Hello! I'm your AI tutor. What would you like to learn about today?",
+      "Hi there! Ready to explore some fascinating topics together?",
+      "Welcome! I'm here to help you learn. What subject interests you?",
+      "Greetings! Let's embark on a learning journey. What can I teach you?"
+    ],
+    "help_responses": [
+      "I can help you with Mathematics, Physics, Chemistry, Biology, Computer Science, History, Literature, Geography, and more! Just ask me about any topic or type 'quiz' to test your knowledge.",
+      "I'm your personal AI tutor! I can explain concepts, answer questions, and create quizzes for you. Try asking about specific topics like 'Tell me about photosynthesis' or 'Explain quantum physics'.",
+      "Here's what I can do: 📚 Explain complex topics in simple terms, 🎯 Create personalized quizzes, 💡 Provide detailed explanations, 🔍 Help with homework and studies. What interests you most?"
+    ],
+    "encouragement": [
+      "Great question! Let me explain that for you.",
+      "Excellent! You're asking all the right questions.",
+      "That's a fantastic topic to explore!",
+      "I love your curiosity! Here's what you need to know:",
+      "Perfect! This is one of my favorite subjects to teach."
+    ],
+    "quiz_encouragement": [
+      "Excellent work! 🎉",
+      "Great job! 👏",
+      "Well done! 🌟",
+      "Perfect! 💯",
+      "Outstanding! 🏆",
+      "Brilliant! ✨",
+      "Fantastic! 🎊"
+    ],
+    "quiz_correction": [
+      "Not quite right, but good try! The correct answer is:",
+      "Close! The actual answer is:",
+      "Good attempt! Here's the correct answer:",
+      "Nice try! The right answer is:",
+      "Almost there! The correct response is:"
+    ]
+  }
 }
 

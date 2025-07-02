@@ -3,16 +3,586 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Tutor</title>
+    <title>AI Tutor - Your Personal Learning Assistant</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .chat-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            width: 100%;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .chat-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .chat-header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            font-size: 1rem;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .bot-message {
+            background: #f8f9fa;
+            color: #333;
+            align-self: flex-start;
+            border: 1px solid #e9ecef;
+            border-bottom-left-radius: 5px;
+            white-space: pre-wrap;
+        }
+
+        .welcome-message {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin: 20px 0;
+        }
+
+        .input-container {
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .input-form {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .input-field {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .send-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-radius: 20px;
+            border-bottom-left-radius: 5px;
+            border: 1px solid #e9ecef;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .features {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 10px 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .voice-toggle {
+            margin: 10px 0;
+        }
+
+        .voice-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .voice-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .voice-btn.disabled {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: rgba(255, 0, 0, 0.3);
+        }
+
+        .thinking-indicator {
+            display: none;
+            align-self: flex-start;
+            padding: 15px 20px;
+            background: #e3f2fd;
+            border-radius: 20px;
+            border-bottom-left-radius: 5px;
+            border: 1px solid #bbdefb;
+            font-style: italic;
+            color: #1976d2;
+        }
+
+        .thinking-steps {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .thinking-step {
+            margin: 5px 0;
+            opacity: 0;
+            animation: fadeInStep 0.5s ease-in forwards;
+        }
+
+        .thinking-step:nth-child(1) { animation-delay: 0.2s; }
+        .thinking-step:nth-child(2) { animation-delay: 0.4s; }
+        .thinking-step:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeInStep {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes typing {
+            0%, 80%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                height: 90vh;
+                margin: 10px;
+            }
+            
+            .chat-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to AI Tutor</h1>
-    <form method="POST" action="/">
-        <label for="user_input">welcome! i am an ai tutor:</label><br>
-        <input type="text" id="user_input" name="user_input" placeholder="Type your question here..." required>
-        <button type="submit">Submit</button>
-    </form>
-    <h2>Bot Response:</h2>
-    <p>{{ bot_response }}</p>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1><i class="fas fa-robot"></i> AI Tutor</h1>
+            <p>Your Personal Learning Assistant</p>
+            <div class="voice-toggle">
+                <button id="voiceToggle" class="voice-btn" onclick="toggleVoice()">
+                    <i class="fas fa-volume-up"></i> Voice: ON
+                </button>
+            </div>
+            <div class="features">
+                <div class="feature" onclick="sendMessage('Tell me about mathematics')">📚 Mathematics</div>
+                <div class="feature" onclick="sendMessage('Explain physics')">⚛️ Physics</div>
+                <div class="feature" onclick="sendMessage('What is chemistry?')">🧪 Chemistry</div>
+                <div class="feature" onclick="sendMessage('Biology basics')">🧬 Biology</div>
+                <div class="feature" onclick="sendMessage('Computer science')">💻 CS</div>
+                <div class="feature" onclick="sendMessage('History overview')">🏛️ History</div>
+                <div class="feature" onclick="sendMessage('Quiz mathematics')">🎯 Math Quiz</div>
+                <div class="feature" onclick="sendMessage('Quiz physics')">� Physics Quiz</div>
+            </div>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="welcome-message">
+                <i class="fas fa-graduation-cap"></i> Welcome to your AI Tutor! I can help you learn about Mathematics, Physics, Chemistry, Biology, Computer Science, History, Literature, Geography and more!
+                <br><br>
+                💡 <strong>Try asking:</strong><br>
+                • "Tell me about quantum physics"<br>
+                • "Explain photosynthesis"<br>
+                • "Quiz mathematics easy"<br>
+                • "What is machine learning?"
+            </div>
+            {% if bot_response %}
+            <div class="message user-message">{{ user_input }}</div>
+            <div class="message bot-message">{{ bot_response }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="thinking-indicator" id="thinkingIndicator">
+            🤔 AI is thinking...
+            <div class="thinking-steps" id="thinkingSteps"></div>
+        </div>
+        
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="input-container">
+            <form class="input-form" id="chatForm" method="POST" action="/chat">
+                <input 
+                    type="text" 
+                    id="userInput" 
+                    name="user_input" 
+                    class="input-field" 
+                    placeholder="Ask about any subject, or try 'quiz [subject] [difficulty]'..." 
+                    required
+                    autocomplete="off"
+                >
+                <button type="submit" class="send-button">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chatMessages');
+        const chatForm = document.getElementById('chatForm');
+        const userInput = document.getElementById('userInput');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const thinkingIndicator = document.getElementById('thinkingIndicator');
+        const thinkingSteps = document.getElementById('thinkingSteps');
+        const voiceToggle = document.getElementById('voiceToggle');
+
+        // Voice settings
+        let voiceEnabled = true;
+        let speechSynthesis = window.speechSynthesis;
+
+        // Toggle voice functionality
+        function toggleVoice() {
+            voiceEnabled = !voiceEnabled;
+            const icon = voiceToggle.querySelector('i');
+            const text = voiceToggle.querySelector('text') || voiceToggle.lastChild;
+            
+            if (voiceEnabled) {
+                voiceToggle.classList.remove('disabled');
+                icon.className = 'fas fa-volume-up';
+                voiceToggle.innerHTML = '<i class="fas fa-volume-up"></i> Voice: ON';
+            } else {
+                voiceToggle.classList.add('disabled');
+                icon.className = 'fas fa-volume-mute';
+                voiceToggle.innerHTML = '<i class="fas fa-volume-mute"></i> Voice: OFF';
+                speechSynthesis.cancel(); // Stop any ongoing speech
+            }
+        }
+
+        // Speak text using Web Speech API
+        function speakText(text) {
+            if (!voiceEnabled || !speechSynthesis) return;
+            
+            speechSynthesis.cancel(); // Cancel any ongoing speech
+            
+            const utterance = new SpeechSynthesisUtterance(text.replace(/[^\w\s.,!?]/g, ''));
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+            utterance.volume = 0.8;
+            
+            speechSynthesis.speak(utterance);
+        }
+
+        // Show thinking process
+        function showThinking(message) {
+            thinkingIndicator.style.display = 'block';
+            thinkingSteps.innerHTML = '';
+            scrollToBottom();
+
+            const steps = generateThinkingSteps(message);
+            
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = 'thinking-step';
+                    stepDiv.textContent = `${index + 1}. ${step}`;
+                    thinkingSteps.appendChild(stepDiv);
+                    scrollToBottom();
+                }, index * 800);
+            });
+
+            return steps.length * 800 + 500; // Return total thinking time
+        }
+
+        // Generate thinking steps based on message content
+        function generateThinkingSteps(message) {
+            const steps = [];
+            const msgLower = message.toLowerCase();
+
+            steps.push("Analyzing your question...");
+
+            if (msgLower.includes('quiz')) {
+                steps.push("Selecting appropriate quiz questions...");
+                steps.push("Determining difficulty level...");
+            } else if (msgLower.includes('explain') || msgLower.includes('what is')) {
+                steps.push("Accessing knowledge database...");
+                steps.push("Structuring educational content...");
+                steps.push("Preparing detailed explanation...");
+            } else if (msgLower.includes('help') || msgLower.includes('how')) {
+                steps.push("Understanding your learning needs...");
+                steps.push("Preparing guidance and suggestions...");
+            } else {
+                steps.push("Processing natural language...");
+                steps.push("Identifying relevant topics...");
+                steps.push("Formulating comprehensive response...");
+            }
+
+            return steps;
+        }
+
+        // Hide thinking indicator
+        function hideThinking() {
+            thinkingIndicator.style.display = 'none';
+        }
+
+        // Auto-scroll to bottom
+        function scrollToBottom() {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Add message to chat
+        function addMessage(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            
+            // Handle markdown-like formatting for bot messages
+            if (!isUser) {
+                messageDiv.innerHTML = formatBotMessage(message);
+            } else {
+                messageDiv.textContent = message;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            scrollToBottom();
+
+            // Speak bot messages
+            if (!isUser && voiceEnabled) {
+                speakText(message);
+            }
+        }
+
+        // Format bot messages with basic markdown support
+        function formatBotMessage(text) {
+            return text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/`(.*?)`/g, '<code>$1</code>')
+                .replace(/\n/g, '<br>');
+        }
+
+        // Send message function for feature buttons
+        function sendMessage(message) {
+            userInput.value = message;
+            chatForm.dispatchEvent(new Event('submit'));
+        }
+
+        // Handle form submission with AJAX
+        chatForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, true);
+            userInput.value = '';
+
+            // Show thinking process
+            const thinkingTime = showThinking(message);
+
+            try {
+                // Wait for thinking animation to complete
+                setTimeout(async () => {
+                    hideThinking();
+                    
+                    // Show typing indicator
+                    typingIndicator.style.display = 'block';
+                    scrollToBottom();
+
+                    const response = await fetch('/api/chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ 
+                            message: message,
+                            voice_enabled: voiceEnabled 
+                        })
+                    });
+
+                    const data = await response.json();
+                    
+                    // Hide typing indicator
+                    typingIndicator.style.display = 'none';
+                    
+                    // Add bot response with slight delay for realism
+                    setTimeout(() => {
+                        addMessage(data.message);
+                    }, 300);
+                    
+                }, thinkingTime);
+                
+            } catch (error) {
+                hideThinking();
+                typingIndicator.style.display = 'none';
+                addMessage('Sorry, I encountered an error. Please try again.');
+            }
+        });
+
+        // Focus input on page load
+        userInput.focus();
+
+        // Handle enter key
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                chatForm.dispatchEvent(new Event('submit'));
+            }
+        });
+
+        // Auto-scroll on page load
+        window.addEventListener('load', scrollToBottom);
+
+        // Initialize voice settings
+        if (!speechSynthesis) {
+            voiceToggle.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
