@@ -6,6 +6,7 @@ import random
 import os
 import re
 import math
+import requests  # For local LLM HTTP calls
 from datetime import datetime, timedelta
 from config import Config
 
@@ -69,7 +70,7 @@ def speak(text):
         except:
             pass  # If speech fails, continue silently
 
-class AIAssistant:
+class AITutor:
     def __init__(self):
         self.subjects = subjects
         self.quiz_db = quiz_database
@@ -77,8 +78,6 @@ class AIAssistant:
         self.common_sense = common_sense_knowledge
         self.math_ops = math_operations
         self.casual_conv = casual_conversation
-        self.conversation_history = []
-        self.user_context = {}
     
     def calculate_math(self, expression):
         """Safely evaluate mathematical expressions"""
@@ -97,7 +96,7 @@ class AIAssistant:
                 clean_expr = clean_expr.replace('divided by', '/')
             
             # Use eval safely for basic arithmetic
-            if clean_expr and all(c in '0123456789+-*/().,\s' for c in clean_expr):
+            if clean_expr and all(c in '0123456789+-*/()., ' for c in clean_expr):
                 result = eval(clean_expr)
                 return f"The answer is: **{result}**\n\nCalculation: {clean_expr} = {result}"
             
@@ -393,10 +392,11 @@ class AIAssistant:
         if any(word in user_lower for word in ['learn', 'study', 'teach me', 'understand', 'know about']):
             available_subjects = ', '.join([s.replace('_', ' ').title() for s in self.subjects.keys()])
             return f"I'd love to help you learn! I can teach you about:\n\n{available_subjects}\n\n🎯 You can also take subject-specific quizzes by typing 'quiz [subject]'\n🧮 Ask me math questions like 'what is 25 × 4?'\n� Or just chat with me about anything!\n�💡 Just ask me about any topic you're curious about!"
-        
-        # Fallback with helpful suggestions
-        return "I'm not sure about that specific topic, but I'm here to help! 😊\n\n💡 **Try asking me:**\n• Educational questions: 'Explain photosynthesis'\n• Math problems: 'What is 15 + 27?'\n• Common sense: 'Why do things fall down?'\n• Casual chat: 'How are you doing?'\n• Subject learning: 'Tell me about physics'\n• Quizzes: 'Quiz mathematics easy'\n\nWhat would you like to explore?"
-    
+
+        # Fallback: Use local LLM for open-ended/general chat
+        llm_response = call_local_llm(user_input)
+        return llm_response
+
     def get_general_help_response(self):
         """Return a helpful general response"""
         available_subjects = ', '.join([s.replace('_', ' ').title() for s in self.subjects.keys()])
@@ -424,6 +424,23 @@ class AIAssistant:
 
 # Initialize AI Tutor
 ai_tutor = AITutor()
+
+# --- Local LLM integration ---
+def call_local_llm(prompt, model="llama2", base_url="http://localhost:11434"):
+    """Send a prompt to a local LLM server (Ollama/llama.cpp) and return the response text."""
+    try:
+        # Ollama/llama.cpp compatible API
+        url = f"{base_url}/api/generate"
+        payload = {"model": model, "prompt": prompt, "stream": False}
+        resp = requests.post(url, json=payload, timeout=60)
+        if resp.status_code == 200:
+            data = resp.json()
+            # Ollama returns {'response': '...'}
+            return data.get("response", "[No response from LLM]")
+        else:
+            return f"[LLM error: {resp.status_code}]"
+    except Exception as e:
+        return f"[LLM connection error: {e}]"
 
 # API endpoint for AJAX requests
 @app.route("/api/chat", methods=["POST"])
